@@ -2,7 +2,7 @@
 
 typedef struct _stack {
 	int buf[STACK_SIZE];
-	int* top;
+	int top;
 } stack;
 
 stack* init_stack();

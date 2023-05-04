@@ -4,7 +4,6 @@
 int main() {
 	stack *ss = init_stack(ss);
 	push(ss, 1);
-	printf("c\n");
-	printf("%d", pop(ss));
-	printf("%d", pop(ss));
+	printf("%d\n", pop(ss));
+	printf("%d\n", pop(ss));
 }

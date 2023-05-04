@@ -10,7 +10,6 @@ stack *init_stack() {
 }
 
 int is_full(stack *Stack) {
-	printf("%d\n", *(Stack->top));
 	if (*(Stack->top) >= STACK_SIZE -1) return 1;
 	else return 0;
 }
@@ -21,9 +20,7 @@ int is_empty(stack *Stack) {
 }
 
 int push(stack *Stack, int data) {
-	printf("%d\n", *(Stack->top));
 	if (!is_full(Stack)) {
-		printf("f\n");
 		Stack->buf[++(*(Stack->top))] = data;
 		return 0;
 	}

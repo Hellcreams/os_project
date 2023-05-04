@@ -5,7 +5,7 @@ typedef struct _stack {
 	int* top;
 } stack;
 
-void init(stack*);
+stack* init_stack();
 
 int is_full(stack*);
 

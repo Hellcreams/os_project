@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include "stack.h"
 
-void init(stack *Stack) {
-	Stack = malloc(sizeof(stack));
+stack *init_stack() {
+	stack *Stack = malloc(sizeof(stack));
 	Stack->top = malloc(sizeof(int));
 	*(Stack->top) = -1;
-	printf("%d\n", *(Stack->top));
+	return Stack;
 }
 
 int is_full(stack *Stack) {

@@ -2,8 +2,7 @@
 #include "stack.h"
 
 int main() {
-	stack *ss;
-	init(ss);
+	stack *ss = init_stack(ss);
 	push(ss, 1);
 	printf("c\n");
 	printf("%d", pop(ss));

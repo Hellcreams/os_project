@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include "stack.h"
 
 int main() {
-	push(1);
-	push(2);
-	push(3);
-	for (int i = 0; i < 3; i++)
-		printf("%d\n", pop());
+	stack *ss;
+	init(ss);
+	push(ss, 1);
+	printf("c\n");
+	printf("%d", pop(ss));
+	printf("%d", pop(ss));
 }

@@ -1,10 +1,17 @@
-#define STACK_SIZE 10
+#define STACK_SIZE 512
 
-int is_full();
+typedef struct _stack {
+	int buf[STACK_SIZE];
+	int* top;
+} stack;
 
-int is_empty();
+void init(stack*);
 
-int push(int);
+int is_full(stack*);
 
-int pop();
+int is_empty(stack*);
+
+int push(stack*, int);
+
+int pop(stack*);
 

@@ -1,7 +1,13 @@
 #define STACK_SIZE 512
 
+typedef struct buf {
+	int process_id;
+	int priority;
+	long computing_time;
+} data;
+
 typedef struct _stack {
-	int buf[STACK_SIZE];
+	data buf[STACK_SIZE];
 	int top;
 } stack;
 
@@ -11,7 +17,6 @@ int is_full(stack*);
 
 int is_empty(stack*);
 
-int push(stack*, int);
+int push(stack*, int, int, long);
 
-int pop(stack*);
-
+data* pop(stack*);

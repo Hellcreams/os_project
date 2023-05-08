@@ -18,18 +18,28 @@ int is_empty(stack *Stack) {
 	else return 0;
 }
 
-int push(stack *Stack, int data) {
+int push(stack *Stack, int pid, int prior, long c_time) {
 	if (!is_full(Stack)) {
-		Stack->buf[++(Stack->top)] = data;
+		(Stack->top)++;
+		Stack->buf[(Stack->top)].process_id  = pid;
+		Stack->buf[(Stack->top)].priority = prior;
+		Stack->buf[(Stack->top)].computing_time = c_time;
 		return 0;
 	}
 	return -1;
 }
 
-int pop(stack *Stack) {
+data* pop(stack *Stack) {
+	data *buffer;
+	buffer = malloc(sizeof(data));
 	if (!is_empty(Stack)) {
-		return Stack->buf[(Stack->top)--];
+		buffer->process_id = Stack->buf[(Stack->top)].process_id;
+		buffer->priority = Stack->buf[(Stack->top)].priority;
+		buffer->computing_time = Stack->buf[(Stack->top)].computing_time;
+		(Stack->top)--;
+		return buffer;
 	}
-	fprintf(stderr, "error : Failed to pop because the stack is EMPTY!\n");
-	return 0;
+
+	free(buffer);
+	return NULL;
 }

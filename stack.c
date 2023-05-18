@@ -18,30 +18,19 @@ int is_empty(stack *Stack) {
 	else return 0;
 }
 
-int push(stack *Stack, int pid, int prior, long c_time, long e_time) {
+int push(stack *Stack, data buf) {
 	if (!is_full(Stack)) {
 		(Stack->top)++;
-		Stack->buf[(Stack->top)].process_id  = pid;
-		Stack->buf[(Stack->top)].priority = prior;
-		Stack->buf[(Stack->top)].computing_time = c_time;
-		Stack->buf[(Stack->top)].entry_time = e_time;
+		Stack->buf[(Stack->top)] = buf;
 		return 0;
 	}
 	return -1;
 }
 
-data* pop(stack *Stack) {
-	data *buffer;
-	buffer = malloc(sizeof(data));
+data pop(stack *Stack) {
+	data buffer =  {0, -1, 0, 0};
 	if (!is_empty(Stack)) {
-		buffer->process_id = Stack->buf[(Stack->top)].process_id;
-		buffer->priority = Stack->buf[(Stack->top)].priority;
-		buffer->computing_time = Stack->buf[(Stack->top)].computing_time;
-		buffer->entry_time = Stack->buf[(Stack->top)].entry_time;
-		(Stack->top)--;
-		return buffer;
+		buffer = Stack->buf[(Stack->top--)];
 	}
-
-	free(buffer);
-	return NULL;
+	return buffer;
 }

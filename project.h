@@ -20,26 +20,19 @@ int is_full(stack*);
 
 int is_empty(stack*);
 
-int push(stack*, int, int, long, long);
+int push(stack*, data);
 
-data* pop(stack*);
+data pop(stack*);
 
 // tree
 typedef struct _tree_node {
 	data buf;;
 	struct _tree_node *left_node;
 	struct _tree_node *right_node;
-} node;
+} node;;
 
-typedef struct _tree_head {
-	int (*determinant)(data, data);		// 두 데이터를 비교해줄 함수
-	node *root_node;
-} tree;
+node* insert_node(node*, data, int(*)(data, data));
 
-void insert_node(tree*, int, int, long, long);
+node* remove_min_node(node*);
 
-tree* init_tree(int (*)(data, data));
-
-data pop_min_node(tree*);
-
-void remove_tree(tree*);
+data get_min_node(node*);

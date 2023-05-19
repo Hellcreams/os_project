@@ -37,8 +37,3 @@ void read() {
 	}
 	fclose(csvfile);
 }
-
-int main() {
-	read();
-	return 0;
-}

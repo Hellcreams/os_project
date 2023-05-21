@@ -2,61 +2,48 @@
 #include <stdlib.h>
 #include "project.h"
 
-node* insert_node(node *root_node, data d, int (*function)(data a, data b)) {
-	// 위치 찾기
-	int x;
-	node *p_node, *c_node;
+node* init_node(data d) {
+	node *new_node = malloc(sizeof(node));
+	new_node->buf = d;
+	new_node->left_node = NULL;
+	new_node->right_node = NULL;
+	return new_node;
+}
 
-	for(c_node = root_node; c_node != NULL;) {
-		printf("hello\n");
-		p_node = c_node;
-		if(x = function(d, c_node->buf) < 0)
-			c_node = c_node->left_node;
+void insert_node(node **root_node, data d, int (*function)(data a, data b)) {
+	node **c_node;
+
+	for(c_node = root_node; *c_node != NULL;) {
+		if(function(d, (*c_node)->buf) < 0)
+			c_node = &((*c_node)->left_node);
 		else
-			c_node = c_node->right_node;
-		printf("bye\n");	
+			c_node = &((*c_node)->right_node);
 	}
 
-	// 
-
-	// 값 넣기
-	c_node = malloc(sizeof(data));
-	c_node->buf = d;
-	if (x < 0) p_node->left_node = c_node;
-	else p_node->right_node = p_node;
-
-	return root_node;
+	*c_node = init_node(d);
 }
 
-node* remove_min_node(node* root_node) {
+data pop_min_node(node** root_node) {
 	data table;
-	node *p_node, *c_node;
+	node **c_node, *x_node;
 	
 	// 트리에 아무것도 없는 경우
-	if(root_node == NULL)
-		return NULL;
-
-	for(c_node = root_node; c_node->left_node != NULL; c_node = c_node->left_node)
-		p_node = c_node;
-
-	if(p_node == NULL)
-		root_node = c_node->right_node;
-	else
-		p_node->left_node = c_node->right_node;
-	free(c_node);
-	return root_node;
-}
-
-data get_min_node(node* root_node) {
-	data table;
-	node *c_node;
-	
-	// 트리에 아무것도 없는 경우
-	if(root_node == NULL) {
+	if(*root_node == NULL) {
 		data t = {-1, 0, 0, 0};
 		return t;
 	}
 
-	for(c_node = root_node; c_node->left_node != NULL; c_node = c_node->left_node);
-	return c_node->buf;
+	for(c_node = root_node; (*c_node)->left_node != NULL; c_node = &((*c_node)->left_node));
+	
+	table = (*c_node)->buf;
+	
+	x_node = *c_node;
+	if((*c_node)->right_node != NULL)
+		*c_node = (*c_node)->right_node;
+	else
+		*c_node = NULL;
+	free(x_node);
+
+	return table;
+
 }

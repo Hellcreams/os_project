@@ -31,8 +31,6 @@ typedef struct _tree_node {
 	struct _tree_node *right_node;
 } node;;
 
-node* insert_node(node*, data, int(*)(data, data));
+void insert_node(node**, data, int(*)(data, data));
 
-node* remove_min_node(node*);
-
-data get_min_node(node*);
+data pop_min_node(node**);

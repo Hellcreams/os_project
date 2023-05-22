@@ -34,3 +34,6 @@ typedef struct _tree_node {
 void insert_node(node**, data, int(*)(data, data));
 
 data pop_min_node(node**);
+
+// read_csv
+data read(FILE *);

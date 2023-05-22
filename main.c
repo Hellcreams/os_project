@@ -14,6 +14,17 @@ int how(data new, data old) {
 
 int main(int argc, char *argv[]) {
 	data buffer;
+	FILE* f;
+
+	// read_csv
+	f = fopen("text.csv", "r");
+	while (!feof(f)) {
+		buffer = read(f);
+		printf("%d,%d,%ld,%ld\n", buffer.process_id, buffer.priority,
+				buffer.computing_time, buffer.entry_time);
+	}
+	printf("End Of File.\n");
+
 	// stack
 	stack *ss = init_stack(ss);
 	

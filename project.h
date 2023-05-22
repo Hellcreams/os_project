@@ -35,5 +35,7 @@ void insert_node(node**, data, int(*)(data, data));
 
 data pop_min_node(node**);
 
-// read_csv
-data read(FILE *);
+// edit_csv
+data csv_read(FILE *, int);
+
+void csv_write(FILE *, data, int);

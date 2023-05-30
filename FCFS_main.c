@@ -44,8 +44,9 @@ int main() {
 
         // 결과를 출력 파일에 기록
         if (running_process.process_id != 0) {
-            csv_write(outputfile, running_process, current_time - running_process.entry_time);
-            total_time += current_time - running_process.entry_time;
+            int ta_time = current_time - running_process.entry_time;
+            csv_write(outputfile, running_process, ta_time);
+            total_time += ta_time;
             process_count++;
         }
     }

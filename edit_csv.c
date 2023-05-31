@@ -52,7 +52,7 @@ void csv_write(FILE *csvfile, data d, int ta_time) {
 		d.process_id, d.priority, d.computing_time, ta_time);
 }
 
-// Æò±Õ¹İÈ¯½Ã°£ ±¸ÇÏ±â(normalized average turn_around_time(ATAT))
+// í‰ê· ë°˜í™˜ì‹œê°„ êµ¬í•˜ê¸°(normalized average turn_around_time(ATAT))
 double nomalized_ATAT(int total_time, int process_count) {
 	double nomalized_time = (double)total_time / (double) process_count;
 	return nomalized_time;

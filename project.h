@@ -1,4 +1,5 @@
 #define STACK_SIZE 512
+#define MAX_QUEUE_SIZE 512
 
 // 공통
 typedef struct buf {
@@ -26,10 +27,10 @@ data pop(stack*);
 
 // tree
 typedef struct _tree_node {
-	data buf;;
+	data buf;
 	struct _tree_node *left_node;
 	struct _tree_node *right_node;
-} node;;
+} node;
 
 void insert_node(node**, data, int(*)(data, data));
 
@@ -39,3 +40,22 @@ data pop_min_node(node**);
 data csv_read(FILE *, int);
 
 void csv_write(FILE *, data, int);
+
+double nomalized_ATAT(int, int);
+
+// queue
+typedef struct _queue {
+	data buf[MAX_QUEUE_SIZE];
+	int front;
+	int rear;
+} queue;
+
+queue* init_queue();
+
+int is_fullqueue(queue*);
+
+int is_emptyqueue(queue*);
+
+int enqueue(queue*, data);
+
+data dequeue(queue*);

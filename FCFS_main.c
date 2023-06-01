@@ -4,17 +4,17 @@
 #include "project.h"
 
 int main() {
-    FILE* csvfile = fopen("input.csv", "r"); // ÀÔ·Â CSV ÆÄÀÏ
-    int process_count = 0; // processÀÇ °³¼ö -> Æò±Õ¹İÈ¯½Ã°£À» ±¸ÇÏ±â À§ÇÔ
-    int current_time = 0; // ÇöÀç ½Ã°£
-    int total_time = 0; // ¹İÈ¯½Ã°£ÀÇ ÃÑÇÕ -> Æò±Õ¹İÈ¯½Ã°£À» ±¸ÇÏ±â À§ÇÔ
+    FILE* csvfile = fopen("input.csv", "r"); // ì…ë ¥ CSV íŒŒì¼
+    int process_count = 0; // processì˜ ê°œìˆ˜ -> í‰ê· ë°˜í™˜ì‹œê°„ì„ êµ¬í•˜ê¸° ìœ„í•¨
+    int current_time = 0; // í˜„ì¬ ì‹œê°„
+    int total_time = 0; // ë°˜í™˜ì‹œê°„ì˜ ì´í•© -> í‰ê· ë°˜í™˜ì‹œê°„ì„ êµ¬í•˜ê¸° ìœ„í•¨
 
     if (csvfile == NULL) {
         printf("Failed to open the input file.\n");
         return 1;
     }
 
-    FILE* outputfile = fopen("FCFS_output.csv", "w+"); // Ãâ·Â CSV ÆÄÀÏ
+    FILE* outputfile = fopen("FCFS_output.csv", "w+"); // ì¶œë ¥ CSV íŒŒì¼
 
     if (outputfile == NULL) {
         printf("Failed to open the output file.\n");
@@ -22,27 +22,27 @@ int main() {
         return 1;
     }
 
-    queue* ready_queue = init_queue(); // ÁØºñ Å¥ ÃÊ±âÈ­
+    queue* ready_queue = init_queue(); // ì¤€ë¹„ í ì´ˆê¸°í™”
 
-    // CSV ÆÄÀÏ¿¡¼­ ÇÁ·Î¼¼½º Á¤º¸ ÀĞ¾î¿À±â
+    // CSV íŒŒì¼ì—ì„œ í”„ë¡œì„¸ìŠ¤ ì •ë³´ ì½ì–´ì˜¤ê¸°
     data current_process;
-    current_process.entry_time = 0; // entry_time 0À¸·Î ÃÊ±âÈ­
+    current_process.entry_time = 0; // entry_time 0ìœ¼ë¡œ ì´ˆê¸°í™”
     while ((current_process = csv_read(csvfile, current_process.entry_time)).process_id != -1) {
-        // ÇöÀç ÇÁ·Î¼¼½ºÀÇ ÁøÀÔ ½Ã°£À» ¼³Á¤ÇÏ°í, ÁØºñ Å¥¿¡ Ãß°¡
+        // í˜„ì¬ í”„ë¡œì„¸ìŠ¤ì˜ ì§„ì… ì‹œê°„ì„ ì„¤ì •í•˜ê³ , ì¤€ë¹„ íì— ì¶”ê°€
         enqueue(ready_queue, current_process);
     }
     printf("Process_id    priority    computing_time  turn_around time\n");
-    // FCFS ½ºÄÉÁÙ¸µ ½ÇÇà
+    // FCFS ìŠ¤ì¼€ì¤„ë§ ì‹¤í–‰
     while (!is_emptyqueue(ready_queue)) {
-        // ÁØºñ Å¥¿¡¼­ ´ÙÀ½ ÇÁ·Î¼¼½º ÃßÃâ
+        // ì¤€ë¹„ íì—ì„œ ë‹¤ìŒ í”„ë¡œì„¸ìŠ¤ ì¶”ì¶œ
         data running_process = dequeue(ready_queue);
 
-        // ÇÁ·Î¼¼½º ½ÇÇà (computing_time ¸¸Å­ ½Ã°£ °æ°ú)
+        // í”„ë¡œì„¸ìŠ¤ ì‹¤í–‰ (computing_time ë§Œí¼ ì‹œê°„ ê²½ê³¼)
         if (running_process.process_id != 0) {
             current_time += running_process.computing_time;
         }
 
-        // °á°ú¸¦ Ãâ·Â ÆÄÀÏ¿¡ ±â·Ï
+        // ê²°ê³¼ë¥¼ ì¶œë ¥ íŒŒì¼ì— ê¸°ë¡
         if (running_process.process_id != 0) {
             int ta_time = current_time - running_process.entry_time;
             csv_write(outputfile, running_process, ta_time);
@@ -51,10 +51,10 @@ int main() {
         }
     }
     double FCFS_nomalized_ATAT = nomalized_ATAT(total_time, process_count);
-    printf("FCFS_Æò±Õ¹İÈ¯½Ã°£ = %.2f\n", FCFS_nomalized_ATAT); // ¼Ò¼öÁ¡ 2ÀÚ¸®±îÁö Ãâ·Â
+    printf("FCFS_í‰ê· ë°˜í™˜ì‹œê°„ = %.2f\n", FCFS_nomalized_ATAT); // ì†Œìˆ˜ì  2ìë¦¬ê¹Œì§€ ì¶œë ¥
 
     fclose(csvfile);
     fclose(outputfile);
-
+    free(ready_queue);
     return 0;
 }

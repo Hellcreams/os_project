@@ -33,9 +33,12 @@ int main() {
     }
     printf("Process_id    priority    computing_time  turn_around time\n");
     // FCFS 스케줄링 실행
-    while (!is_emptyqueue(ready_queue)) {
+    while (1) {
         // 준비 큐에서 다음 프로세스 추출
         data running_process = dequeue(ready_queue);
+        if (running_process.priority < 0) {
+            break;
+        }
 
         // 프로세스 실행 (computing_time 만큼 시간 경과)
         if (running_process.process_id != 0) {

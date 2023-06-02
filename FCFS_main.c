@@ -36,6 +36,7 @@ int main() {
     while (1) {
         // 준비 큐에서 다음 프로세스 추출
         data running_process = dequeue(ready_queue);
+        // 우선순위가 0보다 작으면 큐가 비어있는 상태
         if (running_process.priority < 0) {
             break;
         }

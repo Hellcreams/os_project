@@ -27,8 +27,8 @@ data csv_read(FILE *csvfile, int e_time) {
 		p = strtok(NULL, ",");
 	}
 	
-	if(ary[0] == -1) {
-		data t = {-1, 0, 0, 0};
+	if(ary[0] != 0) {
+		data t = {-1, ary[0] - 2, 0, 0};
 		return t;
 	}
 

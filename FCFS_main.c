@@ -14,7 +14,7 @@ int main() {
         return 1;
     }
 
-    FILE* outputfile = fopen("FCFS_output.csv", "w+"); // 출력 CSV 파일
+    FILE* outputfile = fopen("FCFS_out.csv", "w+"); // 출력 CSV 파일
 
     if (outputfile == NULL) {
         printf("Failed to open the output file.\n");

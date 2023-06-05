@@ -46,10 +46,8 @@ data csv_read(FILE *csvfile, int e_time) {
 }
 
 void csv_write(FILE *csvfile, data d, int ta_time) {
-	/*
 	fprintf(csvfile, "%d,%d,%ld,%d\n", 
 			d.process_id, d.priority, d.computing_time, ta_time);
-	*/
 	fprintf(stdout, "%d		%d		%ld		%d\n",
 		d.process_id, d.priority, d.computing_time, ta_time);
 }
